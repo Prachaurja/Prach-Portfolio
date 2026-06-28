@@ -1,0 +1,5 @@
+# Environment files — never commit secrets
+backend/.env
+backend/.env.*
+.env
+.env.*
