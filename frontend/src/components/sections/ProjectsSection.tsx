@@ -67,7 +67,7 @@ export default function ProjectsSection() {
     <section id="projects" className="relative z-10 mx-auto max-w-5xl px-6 py-24">
       <div className="mb-12 text-center">
         <p className="font-display mb-3 text-sm uppercase tracking-[0.3em] text-[var(--teal)]">
-          Selected Work
+          Projects
         </p>
         <h2 className="font-display text-4xl font-bold sm:text-5xl">
           Things I&apos;ve <span className="text-gradient">Shipped</span>
