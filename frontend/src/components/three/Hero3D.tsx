@@ -18,10 +18,8 @@ function ParticleField() {
 
   useFrame((state, delta) => {
     if (!ref.current) return;
-    // slow ambient rotation
     ref.current.rotation.y += delta * 0.04;
     ref.current.rotation.x += delta * 0.015;
-    // gentle drift toward mouse
     const { x, y } = state.pointer;
     ref.current.rotation.y += x * delta * 0.15;
     ref.current.rotation.x += y * delta * 0.15;
@@ -31,8 +29,8 @@ function ParticleField() {
     <Points ref={ref} positions={positions} stride={3}>
       <PointMaterial
         transparent
-        color="#7dd3fc"
-        size={0.018}
+        color="#dcdce4"
+        size={0.016}
         sizeAttenuation
         depthWrite={false}
       />
@@ -50,8 +48,8 @@ export default function Hero3D() {
       <ParticleField />
       <EffectComposer>
         <Bloom
-          intensity={1.2}
-          luminanceThreshold={0.1}
+          intensity={1.0}
+          luminanceThreshold={0.15}
           luminanceSmoothing={0.9}
           mipmapBlur
         />
