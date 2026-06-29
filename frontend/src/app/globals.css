@@ -1,19 +1,30 @@
 @import "tailwindcss";
 
-/* ============================================
-   DESIGN TOKENS — Liquid Glass + Pixel Accent
-   ============================================ */
+/* ============================================================
+   DESIGN TOKENS — Black + Silver Shimmer (monochrome luxe)
+   The variable NAMES stay the same (--teal, --violet, etc.)
+   so every component keeps working — only the VALUES changed.
+   ============================================================ */
 :root {
-  --bg: #0a0a0f;
-  --bg-soft: #12121a;
-  --glass-tint: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.10);
-  --text: #f5f5fa;
-  --text-dim: #9b9bb0;
-  --teal: #5eead4;
-  --violet: #a78bfa;
-  --glow-teal: rgba(94, 234, 212, 0.35);
-  --glow-violet: rgba(167, 139, 250, 0.35);
+  --bg: #000000;
+  --bg-soft: #0a0a0c;
+  --glass-tint: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --text: #f7f7f9;
+  --text-dim: #8a8a93;
+
+  /* Accent is now silver/platinum instead of teal/violet.
+     Kept the same variable names so nothing else breaks. */
+  --teal: #e8e8ee;        /* bright silver-white (primary accent) */
+  --violet: #9aa0b0;      /* cool steel grey (secondary accent) */
+  --glow-teal: rgba(255, 255, 255, 0.22);
+  --glow-violet: rgba(170, 175, 190, 0.16);
+
+  /* Metallic pixel sprite colors */
+  --chrome-light: #f4f4f8;
+  --chrome-mid: #b8bcc8;
+  --chrome-dark: #6e7280;
+  --gold: #d9c38c;        /* tiny warm accent pixel */
 }
 
 * { box-sizing: border-box; }
@@ -29,33 +40,33 @@ body {
   overflow-x: hidden;
 }
 
-/* Ambient gradient that sits under the particle canvas */
+/* Ambient light — now a soft white-silver wash instead of colored glow */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(60% 50% at 20% 10%, var(--glow-teal), transparent 70%),
-    radial-gradient(50% 50% at 85% 80%, var(--glow-violet), transparent 70%),
+    radial-gradient(55% 45% at 25% 8%, var(--glow-teal), transparent 70%),
+    radial-gradient(50% 50% at 82% 85%, var(--glow-violet), transparent 72%),
     var(--bg);
-  opacity: 0.5;
+  opacity: 0.55;
 }
 
 .font-display { font-family: var(--font-space-grotesk), sans-serif; }
 
-/* ============================================
-   LIQUID GLASS PANEL
-   ============================================ */
+/* ============================================================
+   LIQUID GLASS PANEL — now glows with white-silver light
+   ============================================================ */
 .glass {
   background: var(--glass-tint);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
 }
 
 .glass-glow {
@@ -67,33 +78,31 @@ body::before {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, var(--teal), var(--violet));
+  background: linear-gradient(135deg, var(--chrome-light), var(--chrome-dark));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0.5;
+  opacity: 0.45;
   pointer-events: none;
 }
 
-/* Gradient text for accents */
+/* Accent text — now a brushed-silver gradient */
 .text-gradient {
-  background: linear-gradient(120deg, var(--teal), var(--violet));
+  background: linear-gradient(120deg, var(--chrome-light), var(--chrome-mid) 55%, var(--chrome-dark));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* ============================================
-   PIXEL SPRITE — the signature mark
-   Pure CSS 8-bit "pilot" head, bobbing
-   ============================================ */
+/* ============================================================
+   PIXEL SPRITE — metallic chrome pilot with one gold pixel
+   ============================================================ */
 .pixel-sprite {
   width: 32px;
   height: 32px;
   image-rendering: pixelated;
   animation: bob 1.6s ease-in-out infinite;
-  /* drawn with box-shadow pixels, 4px grid */
   position: relative;
 }
 .pixel-sprite::before {
@@ -102,13 +111,12 @@ body::before {
   width: 4px;
   height: 4px;
   left: 0; top: 0;
-  /* Each shadow = one 4px pixel: x y color */
   box-shadow:
-    8px 4px var(--teal),  12px 4px var(--teal),  16px 4px var(--teal),
-    4px 8px var(--teal),   8px 8px #0a0a0f,      12px 8px #0a0a0f,      16px 8px var(--teal),  20px 8px var(--teal),
-    4px 12px var(--teal),  8px 12px var(--teal), 12px 12px var(--teal), 16px 12px var(--teal), 20px 12px var(--teal),
-    8px 16px var(--violet), 12px 16px var(--violet), 16px 16px var(--violet),
-    8px 20px var(--violet), 16px 20px var(--violet);
+    8px 4px var(--chrome-light),  12px 4px var(--chrome-light),  16px 4px var(--chrome-mid),
+    4px 8px var(--chrome-light),   8px 8px #000000,      12px 8px #000000,      16px 8px var(--chrome-mid),  20px 8px var(--chrome-mid),
+    4px 12px var(--chrome-mid),  8px 12px var(--chrome-light), 12px 12px var(--chrome-light), 16px 12px var(--chrome-mid), 20px 12px var(--chrome-dark),
+    8px 16px var(--chrome-mid), 12px 16px var(--chrome-dark), 16px 16px var(--chrome-dark),
+    8px 20px var(--gold), 16px 20px var(--chrome-dark);
 }
 
 @keyframes bob {
@@ -121,18 +129,21 @@ body::before {
   html { scroll-behavior: auto; }
 }
 
-/* Focus visibility for keyboard users */
 :focus-visible {
-  outline: 2px solid var(--teal);
+  outline: 2px solid var(--chrome-light);
   outline-offset: 2px;
 }
 
-
-/* Fade for the project detail card swap */
+/* ---- Fade for the project detail card swap ---- */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
   article { animation: none !important; }
+}
+
+/* Sections clear the floating navbar when jumped to via nav links */
+section[id] {
+  scroll-margin-top: 6rem;
 }
