@@ -26,7 +26,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative z-10 mx-auto max-w-2xl px-6 py-24">
+    <section id="contact" className="container-x relative z-10 py-24">
       <div className="mb-12 text-center">
         <p className="font-display mb-3 text-sm uppercase tracking-[0.3em] text-[var(--teal)]">
           Get in Touch
