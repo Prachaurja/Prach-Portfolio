@@ -42,7 +42,7 @@ export default function Hero3D() {
   return (
     <Canvas
       camera={{ position: [0, 0, 4] }}
-      className="!absolute inset-0 -z-10"
+      className="!fixed inset-0 -z-10"
       gl={{ antialias: true, alpha: true }}
     >
       <ParticleField />
