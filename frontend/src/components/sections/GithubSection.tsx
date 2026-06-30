@@ -71,7 +71,7 @@ export default function GithubSection() {
   return (
     <section
       id="github"
-      className="relative z-10 mx-auto max-w-6xl px-6 py-24"
+      className="container-x relative z-10 py-24"
     >
       <div className="mb-12 text-center">
         <p className="font-display mb-3 text-sm uppercase tracking-[0.3em] text-[var(--teal)]">
