@@ -26,7 +26,7 @@ export default function Navbar() {
         className={`glass glass-glow flex items-center gap-4 px-5 py-3 transition-all duration-300 ${
           scrolled ? "scale-[0.98] opacity-95" : ""
         }`}
-        style={{ maxWidth: "min(1000px, 100%)", width: "100%" }}
+        style={{ maxWidth: "min(890px, 100%)", width: "100%" }}
       >
         <a href="#top" className="flex items-center gap-3 shrink-0" aria-label="Home">
           <span className="pixel-sprite" aria-hidden="true" />
