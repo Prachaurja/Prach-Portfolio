@@ -12,7 +12,7 @@ export default function Hero() {
       <Hero3D />
 
       {/* Glass headline panel floats on top */}
-      <div className="glass glass-glow relative z-10 max-w-3xl px-8 py-12 text-center sm:px-14 sm:py-16">
+      <div className="glass glass-glow relative z-10 max-w-4xl px-8 py-12 text-center sm:px-14 sm:py-16">
         <p className="font-display mb-4 text-sm uppercase tracking-[0.3em] text-[var(--teal)]">
           <b> Data Science Enthusiast & Full-Stack Developer based on Python and Javascript Frameworks </b>
         </p>
