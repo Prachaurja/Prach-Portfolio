@@ -5,7 +5,7 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 from app.config import settings
-from app.routers import projects, contact, github, analytics
+from app.routers import projects, contact, github, analytics, content
 
 app = FastAPI(title="Portfolio API")
 
@@ -25,6 +25,7 @@ app.include_router(github.router, prefix="/api/github", tags=["github"])
 app.include_router(projects.router, prefix="/api/projects", tags=["projects"])
 app.include_router(contact.router, prefix="/api/contact", tags=["contact"])
 app.include_router(analytics.router, prefix="/api/analytics", tags=["analytics"])
+app.include_router(content.router, prefix="/api", tags=["content"])
 
 
 @app.get("/api/health")
