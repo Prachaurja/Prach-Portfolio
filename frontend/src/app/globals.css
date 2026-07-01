@@ -35,10 +35,13 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-fraunces), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+
+/* Hard rule from the brief: nothing is italic except the rotating quote. */
+em, i, address, cite, dfn { font-style: normal; }
 
 /* Ambient light — now a soft white-silver wash instead of colored glow */
 body::before {
@@ -53,7 +56,7 @@ body::before {
   opacity: 0.55;
 }
 
-.font-display { font-family: var(--font-space-grotesk), sans-serif; }
+.font-display { font-family: var(--font-playfair), system-ui, sans-serif; }
 
 /* ============================================================
    LIQUID GLASS PANEL — now glows with white-silver light
@@ -151,9 +154,258 @@ section[id] {
 /* Shared content width — every section + navbar align to this */
 .container-x {
   width: 100%;
-  max-width: 950px;
+  max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+/* ============================================================
+   TYPOGRAPHIC MARKS — small tracked labels (sans-serif, uppercase)
+   ============================================================ */
+.label-mark {
+  font-family: var(--font-fraunces), system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* The ONLY italic on the entire site — the rotating famous quote. */
+.quote-italic {
+  font-family: var(--font-fraunces), system-ui, sans-serif;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+/* ============================================================
+   CARDS — built on the existing .glass system
+   ============================================================ */
+.card {
+  background: var(--glass-tint);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* Soft hairline used to divide stacked entries */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--glass-border) 12%,
+    var(--glass-border) 88%,
+    transparent
+  );
+}
+
+/* ============================================================
+   LINKEDIN-STYLE TIMELINE (Clubs / Working Story / Uni Story)
+   ============================================================ */
+.ln-rail {
+  position: relative;
+  padding-left: 2.6rem;
+}
+.ln-rail::before {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--glass-border),
+    rgba(255, 255, 255, 0.04)
+  );
+}
+.ln-node {
+  position: absolute;
+  /* sits in the rail gutter, centred on the vertical line (line is 1.75rem
+     to the left of the content edge inside .ln-rail) */
+  left: -2rem;
+  top: 0.3rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: radial-gradient(circle at 35% 35%, var(--chrome-light), var(--chrome-dark));
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================================
+   PHOTO PLACEHOLDERS — editable from the Dev Tool
+   ============================================================ */
+.photo-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.018),
+      rgba(255, 255, 255, 0.018) 10px,
+      rgba(255, 255, 255, 0.04) 10px,
+      rgba(255, 255, 255, 0.04) 20px
+    );
+}
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1rem;
+}
+
+/* Brushed-silver sheen that sweeps across hovered cards/buttons */
+.sheen {
+  position: relative;
+  overflow: hidden;
+}
+.sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.12) 48%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.85s ease;
+  pointer-events: none;
+}
+.sheen:hover::after {
+  transform: translateX(120%);
+}
+
+/* GitHub contribution heatmap cell pulse */
+@keyframes cellpop {
+  from { transform: scale(0.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Loading screen bar shimmer */
+@keyframes loadersheen {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheen::after { transition: none; }
+}
+
+/* ============================================================
+   RESUME — printable "paper" generated from live content
+   ============================================================ */
+.resume-root {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+.resume-paper {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  background: #ffffff;
+  color: #15161a;
+  border-radius: 14px;
+  padding: 3.2rem 3rem;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+  font-family: var(--font-fraunces), system-ui, sans-serif;
+  line-height: 1.5;
+}
+.resume-header { border-bottom: 2px solid #15161a; padding-bottom: 1rem; margin-bottom: 1.4rem; }
+.resume-name {
+  font-family: var(--font-playfair), system-ui, sans-serif;
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.resume-role { margin: 0.25rem 0 0; font-size: 1.05rem; color: #3a3c44; }
+.resume-contact { margin: 0.5rem 0 0; font-size: 0.85rem; color: #55585f; }
+.resume-contact a { color: #55585f; text-decoration: none; }
+.resume-section { margin-top: 1.5rem; }
+.resume-h2 {
+  font-family: var(--font-playfair), system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #15161a;
+  border-bottom: 1px solid #d9dade;
+  padding-bottom: 0.35rem;
+  margin: 0 0 0.7rem;
+}
+.resume-p { margin: 0 0 0.5rem; font-size: 0.92rem; color: #2b2d33; }
+.resume-skills .resume-p { margin-bottom: 0.3rem; }
+.resume-entry { margin-bottom: 0.9rem; }
+.resume-entry-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+.resume-entry-title { font-weight: 700; font-size: 0.98rem; color: #15161a; }
+.resume-entry-meta { font-size: 0.8rem; color: #6a6d75; white-space: nowrap; }
+.resume-tags { font-size: 0.8rem; color: #6a6d75; margin: 0.2rem 0 0; }
+.resume-ul { margin: 0.3rem 0 0; padding-left: 1.1rem; }
+.resume-ul li { font-size: 0.9rem; color: #2b2d33; margin-bottom: 0.3rem; }
+.resume-footer {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #d9dade;
+  font-size: 0.72rem;
+  color: #8a8d95;
+  text-align: center;
+}
+
+@media print {
+  @page { margin: 14mm; }
+  html, body { background: #ffffff !important; }
+  body::before { display: none !important; }
+  header, footer.relative, .no-print, canvas { display: none !important; }
+  .resume-root { min-height: 0; padding: 0; }
+  .resume-paper {
+    box-shadow: none;
+    border-radius: 0;
+    max-width: none;
+    padding: 0;
+  }
+  .resume-section { break-inside: avoid; }
+  .resume-entry { break-inside: avoid; }
 }
