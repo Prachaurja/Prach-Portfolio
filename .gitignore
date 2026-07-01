@@ -3,3 +3,10 @@ backend/.env
 backend/.env.*
 .env
 .env.*
+
+# Dev Tool runtime content store (may hold large embedded images)
+backend/data/
+
+# Python caches
+__pycache__/
+*.pyc
