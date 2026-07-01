@@ -1,27 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { skillGroups, type Skill } from "@/data/profile";
+import { motion, useReducedMotion } from "framer-motion";
+import { useContent } from "@/context/ContentProvider";
+import { type Skill } from "@/lib/content";
+import SectionHeader from "@/components/motion/SectionHeader";
+import Reveal from "@/components/motion/Reveal";
+import { EASE } from "@/components/motion/Reveal";
 
-function getReducedMotion() {
-  return typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function SkillBar({ skill, animate }: { skill: Skill; animate: boolean }) {
+function SkillBar({ skill }: { skill: Skill }) {
+  const reduce = useReducedMotion();
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between">
-        <span className="text-sm font-medium text-[var(--text)]">{skill.name}</span>
+      <div className="mb-2 flex items-end justify-between">
+        <span className="font-display text-[1.05rem] text-[var(--text)]">{skill.name}</span>
         <span className="text-xs text-[var(--text-dim)]">{skill.level}%</span>
       </div>
-      <div className="h-2 w-full overflow-hidden rounded-full bg-white/5">
-        <div
-          className="h-full rounded-full transition-[width] duration-1000 ease-out"
+      <div className="h-[6px] w-full overflow-hidden rounded-full bg-white/[0.06]">
+        <motion.div
+          className="h-full rounded-full"
           style={{
-            width: animate ? `${skill.level}%` : "0%",
-            background: "linear-gradient(90deg, var(--teal), var(--violet))",
+            background: "linear-gradient(90deg, var(--chrome-dark), var(--chrome-light))",
           }}
+          initial={reduce ? false : { width: "0%" }}
+          whileInView={{ width: `${skill.level}%` }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 1.1, ease: EASE }}
         />
       </div>
     </div>
@@ -29,46 +32,26 @@ function SkillBar({ skill, animate }: { skill: Skill; animate: boolean }) {
 }
 
 export default function SkillsSection() {
-  const [animate, setAnimate] = useState(() => getReducedMotion());
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (getReducedMotion()) return;
-
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => entries[0].isIntersecting && setAnimate(true),
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const { content } = useContent();
 
   return (
-    <section id="skills" className="container-x relative z-10 py-24">
-      <div className="mb-12 text-center">
-        <p className="font-display mb-3 text-sm uppercase tracking-[0.3em] text-[var(--teal)]">
-          Toolkit
-        </p>
-        <h2 className="font-display text-4xl font-bold sm:text-5xl">
-          Skills &amp; <span className="text-gradient">Tools</span>
-        </h2>
-      </div>
+    <section id="skills" className="container-x relative z-10 py-24 md:py-32">
+      <SectionHeader eyebrow="Toolkit" title="Skills & *Tools*" />
 
-      <div ref={ref} className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {skillGroups.map((group) => (
-          <div key={group.category} className="glass glass-glow px-7 py-7">
-            <h3 className="font-display mb-6 text-sm uppercase tracking-[0.2em] text-[var(--teal)]">
-              {group.category}
-            </h3>
-            <div className="flex flex-col gap-5">
+      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+        {content.skillGroups.map((group, i) => (
+          <Reveal
+            key={group.category}
+            delay={i * 0.08}
+            className="card sheen px-7 py-8"
+          >
+            <h3 className="label-mark mb-7">{group.category}</h3>
+            <div className="flex flex-col gap-6">
               {group.skills.map((s) => (
-                <SkillBar key={s.name} skill={s} animate={animate} />
+                <SkillBar key={s.name} skill={s} />
               ))}
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
