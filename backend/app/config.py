@@ -7,6 +7,11 @@ class Settings(BaseSettings):
     github_username: str
     frontend_origin: str = "http://localhost:3000"
 
+    # ----- Dev Tool admin -----
+    # Password the Dev Tool sends in the X-Admin-Password header to save
+    # content. Keep this matched with NEXT_PUBLIC_DEV_PASSWORD on the frontend.
+    admin_password: str = "prachaurja"
+
     # ----- Contact email (all optional; form works without them) -----
     smtp_host: str = ""
     smtp_port: int = 587
