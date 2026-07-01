@@ -14,7 +14,7 @@ export default function Footer() {
             <span className="font-display font-bold text-gradient">PRACHAURJA SARKER</span>
           </div>
           <p className="text-sm text-[var(--text-dim)]">
-            Built with Next.js, FastAPI &amp; Three.js · {new Date().getFullYear()}
+            All Rights Reserved · {new Date().getFullYear()}
           </p>
           <div className="flex gap-3">
             {content.socials
