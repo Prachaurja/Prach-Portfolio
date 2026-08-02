@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
 
 const LINKS = [
   { label: "About", href: "#about" },
@@ -63,6 +63,13 @@ export default function Navbar() {
         </ul>
 
         <a
+          href="/jellyfish"
+          className="hidden items-center gap-1.5 rounded-xl border border-[var(--glass-border)] px-4 py-2 text-sm text-[var(--text)] transition-colors hover:border-[#6ff2e0] sm:inline-flex"
+        >
+          <Sparkles className="h-3.5 w-3.5" /> Jellyfish
+        </a>
+
+        <a
           href="/resume"
           className="hidden rounded-xl border border-[var(--glass-border)] px-4 py-2 text-sm text-[var(--text)] transition-colors hover:border-[var(--teal)] sm:inline-block"
         >
@@ -97,6 +104,13 @@ export default function Navbar() {
                 {l.label}
               </a>
             ))}
+            <a
+              href="/jellyfish"
+              onClick={() => setOpen(false)}
+              className="col-span-2 flex items-center justify-center gap-1.5 rounded-lg border border-[var(--glass-border)] px-3 py-2.5 text-center text-sm text-[var(--text)]"
+            >
+              <Sparkles className="h-3.5 w-3.5" /> Jellyfish
+            </a>
             <a
               href="/resume"
               onClick={() => setOpen(false)}
