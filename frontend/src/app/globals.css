@@ -25,6 +25,10 @@
   --chrome-mid: #b8bcc8;
   --chrome-dark: #6e7280;
   --gold: #d9c38c;        /* tiny warm accent pixel */
+
+  /* Self-hosted fontsource fonts (see app/layout.tsx imports). */
+  --font-fraunces: "Inter";
+  --font-playfair: "Plus Jakarta Sans";
 }
 
 * { box-sizing: border-box; }

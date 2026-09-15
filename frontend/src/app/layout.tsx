@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+// Self-hosted fonts (fontsource) — works offline / in sandboxes where
+// Google Fonts is unreachable. Variables match the ones globals.css expects.
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/inter/400-italic.css";
+import "@fontsource/plus-jakarta-sans/400.css";
+import "@fontsource/plus-jakarta-sans/600.css";
+import "@fontsource/plus-jakarta-sans/700.css";
+import "@fontsource/plus-jakarta-sans/800.css";
 import "./globals.css";
 import { ContentProvider } from "@/context/ContentProvider";
 import Navbar from "@/components/layout/Navbar";
@@ -7,22 +17,7 @@ import Footer from "@/components/layout/Footer";
 import LoadingScreen from "@/components/system/LoadingScreen";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 
-// Body sans-serif (also carries the single italic used by the quote ribbon).
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-});
 
-// Display sans-serif for headings.
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-  weight: ["400", "600", "700", "800"],
-});
 
 export const metadata: Metadata = {
   title: "Prachaurja Sarker — Full-Stack Developer & Data Science",
@@ -37,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${plusJakarta.variable}`}>
+      <body>
         <LoadingScreen />
         <ScrollProgress />
         <ContentProvider>
